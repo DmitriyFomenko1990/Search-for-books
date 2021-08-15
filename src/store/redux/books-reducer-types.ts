@@ -18,4 +18,14 @@ export interface BookType {
     description: string;
     categories: string[];
 }
+export interface BookStateType {
+    filter: string;
+    category: "all" | "art" | "biography" | "computers" | "history" | "medical" | "poetry";
+    sort: "relevance" | "newest";
+    currentPage: number;
+    totalPages: number;
+    isServerError: false;
+    books: [] | BookType[];
+};
+
 

@@ -22,3 +22,6 @@ body {
 h1 {
     @include common-h1;
 }
+h2 {
+    @include common-h1;
+}

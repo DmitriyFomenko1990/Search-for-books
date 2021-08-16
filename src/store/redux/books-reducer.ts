@@ -7,7 +7,8 @@ export const initialBooksState: BookStateType = {
     currentPage: 0,
     totalPages: 0,
     isServerError: false,
-    books: []
+    books: [],
+    totalItems: 0,
 };
 
 const booksReducer = (state = initialBooksState, action: bookActions): BookStateType => {
@@ -22,10 +23,12 @@ const booksReducer = (state = initialBooksState, action: bookActions): BookState
             return {...state, sort: action.payload}
         case booksActionsType.SET_CATEGORY:
             return {...state, category: action.payload}
-        case booksActionsType.SET_TOTAL_PAGE:
+        case booksActionsType.SET_TOTAL_PAGES:
             return {...state, totalPages: action.payload}
         case booksActionsType.SET_CURRENT_PAGE:
             return {...state, currentPage: action.payload}
+        case booksActionsType.SET_TOTAL_ITEMS:
+            return {...state, totalItems: action.payload}
         default:
             return state
     }

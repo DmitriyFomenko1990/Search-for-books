@@ -18,12 +18,13 @@ export interface BookType {
     description: string;
     categories: string[];
 }
-type category = "all" | "art" | "biography" | "computers" | "history" | "medical" | "poetry";
-type sort = "relevance" | "newest";
+export type category = "all" | "art" | "biography" | "computers" | "history" | "medical" | "poetry";
+export type sort = "relevance" | "newest";
 export interface BookStateType {
     filter: string;
     category: category;
     sort: sort;
+    totalItems: number;
     currentPage: number;
     totalPages: number;
     isServerError: boolean;
@@ -36,7 +37,8 @@ export enum booksActionsType {
     SET_SORT = 'SET_SORT',
     SET_CATEGORY = 'SET_CATEGORY',
     SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
-    SET_TOTAL_PAGE = 'SET_TOTAL_PAGE'
+    SET_TOTAL_PAGES = 'SET_TOTAL_PAGES',
+    SET_TOTAL_ITEMS = 'SET_TOTAL_ITEMS'
 }
 
 interface FetchBooksAction{
@@ -59,13 +61,16 @@ interface SetCategoryAction{
     type: booksActionsType.SET_CATEGORY;
     payload: category;
 }
-interface SetTotalPageAction{
-    type: booksActionsType.SET_TOTAL_PAGE;
+interface SetTotalPagesAction{
+    type: booksActionsType.SET_TOTAL_PAGES;
     payload: number;
 }
 interface SetCurrentPageAction{
     type: booksActionsType.SET_CURRENT_PAGE;
     payload: number;
 }
-
-export type bookActions = FetchBooksAction | SetErrorAction | SetFilterAction | SetSortAction | SetCategoryAction  | SetTotalPageAction | SetCurrentPageAction;
+interface SetTotalItemsAction{
+    type: booksActionsType.SET_TOTAL_ITEMS;
+    payload: number;
+}
+export type bookActions = FetchBooksAction | SetErrorAction | SetFilterAction | SetSortAction | SetCategoryAction  | SetTotalPagesAction | SetCurrentPageAction | SetTotalItemsAction;

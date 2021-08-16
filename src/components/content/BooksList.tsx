@@ -1,12 +1,11 @@
 import React from 'react';
 import style from './books-list.module.scss';
-import {BookStateType} from "../../store/redux/books-reducer-types";
-import {useTypedSelector} from "../../store/redux/combine-reducers";
-import Book from "./book/Book";
-
-
+import {BookStateType} from '../../store/redux/books-reducer-types';
+import {useTypedSelector} from '../../store/redux/combine-reducers';
+import Book from './book/Book';
 
 const BooksList = () => {
+
     const booksState: BookStateType = useTypedSelector(state => state.booksReducer);
     return (
         <div className={style.wrapper}>

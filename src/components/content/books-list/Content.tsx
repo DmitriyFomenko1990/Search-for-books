@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './content.module.scss';
-import BooksList from "../BooksList";
+import BooksList from '../BooksList';
 
 
 const Content: React.FC = () => {

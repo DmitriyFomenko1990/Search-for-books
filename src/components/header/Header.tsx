@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import style from './header.module.scss';
-import {category, sort} from "../../store/redux/books-reducer-types";
-
+import {category, sort} from '../../store/redux/books-reducer-types';
 
 interface HeaderType{
     sort: sort;

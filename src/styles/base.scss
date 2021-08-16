@@ -23,5 +23,8 @@ h1 {
     @include common-h1;
 }
 h2 {
-    @include common-h1;
+    @include common-h2;
+}
+h3 {
+    @include common-h3;
 }

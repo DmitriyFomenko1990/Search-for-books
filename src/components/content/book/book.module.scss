@@ -1,0 +1,29 @@
+@import "../../../styles/variables";
+
+.wrapper{
+  width: 300px;
+  background: $grey;
+  padding: 40px 15px 15px;
+}
+.image{
+  margin: 0 auto;
+  display: block;
+  width: 165px;
+  height: 264px;
+  box-shadow: #4b4a4a 5px 7px 18px 0px;
+}
+.category{
+  color: $dark-grey;
+  font-size: 21px;
+  text-decoration: underline;
+  margin: 30px 0 15px;
+}
+.title{
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.authors{
+  color: $dark-grey;
+  font-size: 19px;
+}

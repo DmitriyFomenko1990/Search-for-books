@@ -2,6 +2,7 @@
 
 .wrapper{
   width: 300px;
+  min-height: 550px;
   background: $grey;
   padding: 40px 15px 15px;
   margin:0 15px 35px;
@@ -23,6 +24,7 @@
   font-size: 21px;
   font-weight: 700;
   margin-bottom: 5px;
+  color: $black;
 }
 .authors{
   color: $dark-grey;

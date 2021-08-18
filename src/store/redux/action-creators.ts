@@ -1,5 +1,5 @@
 import {bookActions, booksActionsType, BookType, sort, category} from './books-reducer-types';
-import {Dispatch} from "redux";
+import {Dispatch} from 'redux';
 import {booksAPI} from '../../api/api';
 
 export const fetchBooks = (
@@ -38,8 +38,6 @@ export const fetchBook = (id: string) => {
     }
 }
 
-
-
 export const dispatchFilter = (filter: string) => (dispatch: Dispatch<bookActions>) => {
     dispatch(setFilterActionCreator(filter));
 }
@@ -50,10 +48,6 @@ export const dispatchSort = (sort: sort) =>  (dispatch: Dispatch<bookActions>) =
 export const dispatchCategory = (category: category) => (dispatch: Dispatch<bookActions>) =>{
     dispatch(setCategoryActionCreator(category));
 }
-export const dispatchBooks = (books: BookType[]) => (dispatch: Dispatch<bookActions>) =>{
-    dispatch(setBooksActionCreator(books));
-}
-
 
 const setBooksActionCreator = (books: BookType[]): bookActions  => ({type: booksActionsType.FETCH_BOOKS, payload: books});
 const setBookActionCreator = (book: BookType): bookActions  => ({type: booksActionsType.FETCH_BOOK, payload: book});
@@ -64,4 +58,3 @@ const setCategoryActionCreator = (category: category): bookActions  => ({type: b
 const setCurrentPageActionCreator = (page: number): bookActions  => ({type: booksActionsType.SET_CURRENT_PAGE, payload: page});
 const setTotalPagesActionCreator = (pages: number): bookActions  => ({type: booksActionsType.SET_TOTAL_PAGES, payload: pages});
 const setTotalItemsActionCreator = (items: number): bookActions  => ({type: booksActionsType.SET_TOTAL_ITEMS, payload: items});
-

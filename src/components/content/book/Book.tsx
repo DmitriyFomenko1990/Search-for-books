@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './book.module.scss';
 import {BookType} from '../../../store/redux/books-reducer-types';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Book: React.FC<{ book: BookType }> = ({book}) => {
     const image = book.volumeInfo?.imageLinks?.thumbnail?.length ?  book.volumeInfo.imageLinks?.thumbnail : '';

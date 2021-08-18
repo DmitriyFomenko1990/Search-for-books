@@ -3,9 +3,9 @@ import style from './books-list.module.scss';
 import {BookStateType} from '../../store/redux/books-reducer-types';
 import {useTypedSelector} from '../../store/redux/combine-reducers';
 import Book from './book/Book';
-import {fetchBooks} from "../../store/redux/action-creators";
-import {useDispatch} from "react-redux";
-import Loader from "../loader/Loader";
+import {fetchBooks} from '../../store/redux/action-creators';
+import {useDispatch} from 'react-redux';
+import Loader from '../loader/Loader';
 
 const BooksList = () => {
     const [isFetching, setIsFetching] = useState(false)
@@ -18,7 +18,7 @@ const BooksList = () => {
     const totalPages = booksState.totalPages;
     const books = booksState.books;
     let booksArray: JSX.Element[] = [];
-
+    debugger
     if (books !== [])  {
         booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
     }

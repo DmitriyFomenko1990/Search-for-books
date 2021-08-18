@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react';
 import style from './header.module.scss';
 import {BookStateType, category, sort} from '../../store/redux/books-reducer-types';
 import {
-    dispatchBooks,
     dispatchCategory,
     dispatchFilter,
     dispatchSort,
     fetchBooks
-} from "../../store/redux/action-creators";
-import {useTypedSelector} from "../../store/redux/combine-reducers";
-import {useDispatch} from "react-redux";
+} from '../../store/redux/action-creators';
+import {useTypedSelector} from '../../store/redux/combine-reducers';
+import {useDispatch} from 'react-redux';
 //TODO: change useEffect deps
 
 const Header: React.FC = () => {
@@ -22,25 +21,22 @@ const Header: React.FC = () => {
     const booksState: BookStateType = useTypedSelector(state => state.bookReducer);
     const currentPage = booksState.currentPage;
     const totalPages = booksState.totalPages;
-    const books = booksState.books;
 
     useEffect(()=>{
-        dispatch(dispatchBooks([]))
         dispatch(dispatchSort(sort));
         dispatch(dispatchCategory(category));
         dispatch(dispatchFilter(inputValue));
         if (category === 'all') {
-            dispatch(fetchBooks(inputValue, '', sort, currentPage, books, totalPages));
+            dispatch(fetchBooks(inputValue, '', sort, currentPage, [], totalPages));
         } else {
-            dispatch(fetchBooks(inputValue, category, sort, currentPage, books, totalPages));
+            dispatch(fetchBooks(inputValue, category, sort, currentPage, [], totalPages));
         }
     }, [i])
 
     const onHandleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setI(i => i+1)
+        setI(i => i+1);
     };
-
     const onHandleChange = (e:React.FormEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value);
     };

@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import style from './books-page.module.scss';
-import {useDispatch} from "react-redux";
-import {fetchBook} from "../../../store/redux/action-creators";
-import { useRouteMatch } from "react-router-dom";
-import {BookStateType} from "../../../store/redux/books-reducer-types";
-import {useTypedSelector} from "../../../store/redux/combine-reducers";
+import {useDispatch} from 'react-redux';
+import {fetchBook} from '../../../store/redux/action-creators';
+import { useRouteMatch } from 'react-router-dom';
+import {BookStateType} from '../../../store/redux/books-reducer-types';
+import {useTypedSelector} from '../../../store/redux/combine-reducers';
 
 const BooksPage = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,6 @@ const BooksPage = () => {
     const  title = booksState.book.volumeInfo?.title;
     const  authors = booksState.book.volumeInfo?.authors?.join(', ');
     const  description = booksState.book.volumeInfo?.description
-
 
     useEffect(()=>{
         dispatch(fetchBook(url))

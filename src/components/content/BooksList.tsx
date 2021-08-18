@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './books-list.module.scss';
 import {BookStateType} from '../../store/redux/books-reducer-types';
 import {useTypedSelector} from '../../store/redux/combine-reducers';
@@ -7,6 +7,7 @@ import {fetchBooks} from "../../store/redux/action-creators";
 import {useDispatch} from "react-redux";
 
 const BooksList = () => {
+    const [isFetching, setIsFetching] = useState(false)
     const dispatch = useDispatch();
     const booksState: BookStateType = useTypedSelector(state => state.bookReducer);
     const filter = booksState.filter;
@@ -15,11 +16,14 @@ const BooksList = () => {
     const currentPage = booksState.currentPage;
     const totalPages = booksState.totalPages;
     const books = booksState.books;
-    let booksArray: any = [];
+    let booksArray: JSX.Element[] = [];
+
+    if (books !== [])  {
+        booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
+    }
     console.log(booksState)
 
     useEffect(() => {
-        debugger
         if (category === 'all') {
             dispatch(fetchBooks(filter, '', sort, currentPage, books, totalPages));
         } else {
@@ -27,10 +31,12 @@ const BooksList = () => {
         }
     }, []);
 
-    debugger
-    if (books !==[])  {
-            booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
+
+
+    const fetchMoreBooks = () => {
+        setIsFetching(true)
     }
+
 
     return (
         <div className={style.wrapper}>
@@ -40,6 +46,11 @@ const BooksList = () => {
                 ? booksArray
                 : <div/>}
             </div>
+            {isFetching
+                ? <div/>
+                : <button className={style.moreBtn} onClick={fetchMoreBooks}>More books</button>
+            }
+
         </div>
     );
 };

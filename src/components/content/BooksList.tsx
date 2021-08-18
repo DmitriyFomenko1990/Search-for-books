@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import style from './books-list.module.scss';
 import {BookStateType} from '../../store/redux/books-reducer-types';
 import {useTypedSelector} from '../../store/redux/combine-reducers';
@@ -7,10 +7,13 @@ import {fetchBooks} from '../../store/redux/action-creators';
 import {useDispatch} from 'react-redux';
 import Loader from '../loader/Loader';
 
-const BooksList = () => {
+interface BooksListType {
+    booksState: BookStateType;
+}
+
+const BooksList: React.FC<BooksListType> = ({booksState}) => {
     const [isFetching, setIsFetching] = useState(false)
     const dispatch = useDispatch();
-    const booksState: BookStateType = useTypedSelector(state => state.bookReducer);
     const filter = booksState.filter;
     const sort = booksState.sort;
     const category = booksState.category;
@@ -18,12 +21,11 @@ const BooksList = () => {
     const totalPages = booksState.totalPages;
     const books = booksState.books;
     let booksArray: JSX.Element[] = [];
-    debugger
     if (books !== [])  {
         booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
     }
 
-    const fetchNewBooks = async () => {
+    const asyncFetch = async () => {
         if (category === 'all') {
             await dispatch(fetchBooks(filter, '', sort, currentPage, books, totalPages));
         } else {
@@ -33,18 +35,19 @@ const BooksList = () => {
     }
 
     useEffect(() => {
-        fetchNewBooks();
+        asyncFetch();
     }, []);
 
     useEffect(() => {
         if (isFetching) {
-            fetchNewBooks();
+            asyncFetch();
         }
     }, [isFetching]);
 
     const fetchMoreBooks = () => {
         setIsFetching(true)
     }
+
     return (
         <div className={style.wrapper}>
             <h3 className={style.title}>Found {booksState.totalItems} result</h3>

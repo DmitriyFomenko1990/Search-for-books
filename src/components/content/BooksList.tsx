@@ -22,7 +22,6 @@ const BooksList = () => {
     if (books !== [])  {
         booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
     }
-    console.log(booksState);
 
     const fetchNewBooks = async () => {
         if (category === 'all') {

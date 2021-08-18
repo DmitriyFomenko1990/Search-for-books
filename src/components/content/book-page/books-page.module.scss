@@ -1,9 +1,40 @@
 @import "../../../styles/variables";
 
 .wrapper{
-
+  display: flex;
+}
+.coverWrapper{
+  background-color: $grey;
+  padding: 80px 140px 0;
+}
+.bookImage{
+  width: 256px;
+  height: 384px;
+}
+.aboutWrapper{
+  width: 100%;
+  padding: 50px;
+}
+.categories{
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 30px;
 }
 .title {
-
+  margin-bottom: 15px;
 }
-
+.authors{
+  color: #bbbab9;
+  font-size: 21px;
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+.descWrapper{
+  width: 100%;
+  min-height: 300px;
+  padding: 20px;
+  border: $dark-grey solid 1px;
+}
+.description{
+  font-weight: 600;
+}

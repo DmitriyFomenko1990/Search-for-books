@@ -12,7 +12,7 @@ export const booksAPI = {
     },
     getBook(id: string) {
         return axiosInstance
-            .get(`volumes/${id}`)
+            .get(`volumes${id}`)
             .then(response =>  response.data)
     },
 };

@@ -3,11 +3,13 @@ import style from './book.module.scss';
 import {BookType} from '../../../store/redux/books-reducer-types';
 import { Link } from 'react-router-dom';
 
+
 const Book: React.FC<{ book: BookType }> = ({book}) => {
     const image = book.volumeInfo?.imageLinks?.thumbnail?.length ?  book.volumeInfo.imageLinks?.thumbnail : '';
     const bookCategories = book.volumeInfo?.categories?.length ? book.volumeInfo.categories[0] : '';
     const bookTitle = book.volumeInfo?.title?.length ? book.volumeInfo.title : '';
     const bookAuthors =  book.volumeInfo?.authors?.length ? book.volumeInfo.authors?.toString() : '';
+
     return (
         <Link to={`${book.id}`}>
            <div className={style.wrapper}>

@@ -1,7 +1,6 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from './books-list.module.scss';
 import {BookStateType} from '../../store/redux/books-reducer-types';
-import {useTypedSelector} from '../../store/redux/combine-reducers';
 import Book from './book/Book';
 import {fetchBooks} from '../../store/redux/action-creators';
 import {useDispatch} from 'react-redux';
@@ -24,7 +23,7 @@ const BooksList: React.FC<BooksListType> = ({booksState}) => {
     if (books !== [])  {
         booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
     }
-
+debugger
     const asyncFetch = async () => {
         if (category === 'all') {
             await dispatch(fetchBooks(filter, '', sort, currentPage, books, totalPages));

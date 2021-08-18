@@ -1,0 +1,61 @@
+@import '../../styles/variables';
+
+.wrapper{
+  width: 470px;
+  margin:  40px auto 47px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media only screen and (max-width: 768px) {
+    width: 220px;
+    margin: 0 auto;
+  }
+}
+.progressBar{
+  position: relative;
+  width: 100%;
+  height: 3px;
+  margin-top: 10px;
+
+  background: $white;
+  border-radius: 3px;
+}
+.progress{
+  position: absolute;
+  width: 143px;
+  height: 3px;
+
+  background: $blue;
+  box-shadow: 0 0 6px rgba(0, 133, 255, 0.2);
+  border-radius: 3px;
+  animation-duration: 3s;
+  animation-name: loader;
+  animation-iteration-count: infinite;
+  @media only screen and (max-width: 768px) {
+    width: 68px;
+    animation-name: mobilLoader;
+  }
+}
+
+@keyframes loader {
+  from {
+    left: 0;
+  }
+  to {
+    left: 0;
+  }
+  50% {
+    left: 325px;
+  }
+}
+@keyframes mobilLoader {
+  from {
+    left: 0;
+  }
+  to {
+    left: 0;
+  }
+  50% {
+    left: 152px;
+  }
+}

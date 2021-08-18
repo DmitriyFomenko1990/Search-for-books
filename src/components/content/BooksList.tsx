@@ -5,6 +5,7 @@ import {useTypedSelector} from '../../store/redux/combine-reducers';
 import Book from './book/Book';
 import {fetchBooks} from "../../store/redux/action-creators";
 import {useDispatch} from "react-redux";
+import Loader from "../loader/Loader";
 
 const BooksList = () => {
     const [isFetching, setIsFetching] = useState(false)
@@ -47,7 +48,7 @@ const BooksList = () => {
                 : <div/>}
             </div>
             {isFetching
-                ? <div/>
+                ? <Loader/>
                 : <button className={style.moreBtn} onClick={fetchMoreBooks}>More books</button>
             }
 

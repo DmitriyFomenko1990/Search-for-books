@@ -37,6 +37,9 @@ export const dispatchSort = (sort: sort) =>  (dispatch: Dispatch<bookActions>) =
 export const dispatchCategory = (category: category) => (dispatch: Dispatch<bookActions>) =>{
     dispatch(setCategoryActionCreator(category));
 }
+export const dispatchBooks = (books: BookType[]) => (dispatch: Dispatch<bookActions>) =>{
+    dispatch(setBooksActionCreator(books));
+}
 
 
 const setBooksActionCreator = (books: BookType[]): bookActions  => ({type: booksActionsType.FETCH_BOOKS, payload: books});

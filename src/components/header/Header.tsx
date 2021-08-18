@@ -1,7 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import style from './header.module.scss';
 import {BookStateType, category, sort} from '../../store/redux/books-reducer-types';
-import {dispatchCategory, dispatchFilter, dispatchSort, fetchBooks} from "../../store/redux/action-creators";
+import {
+    dispatchBooks,
+    dispatchCategory,
+    dispatchFilter,
+    dispatchSort,
+    fetchBooks
+} from "../../store/redux/action-creators";
 import {useTypedSelector} from "../../store/redux/combine-reducers";
 import {useDispatch} from "react-redux";
 
@@ -19,6 +25,7 @@ const Header: React.FC = () => {
     const books = booksState.books;
 
     useEffect(()=>{
+        dispatch(dispatchBooks([]))
         dispatch(dispatchSort(sort));
         dispatch(dispatchCategory(category));
         dispatch(dispatchFilter(inputValue));
@@ -67,7 +74,7 @@ const Header: React.FC = () => {
                         Sorting by
                         <select className={style.selectInput} value={sort}
                                 onChange={onSortChange}>
-                            <option value="relevance ">relevance</option>
+                            <option value="relevance">relevance</option>
                             <option value="newest">newest</option>
                         </select>
                     </label>

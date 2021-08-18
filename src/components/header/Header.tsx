@@ -9,10 +9,12 @@ import {
 } from '../../store/redux/action-creators';
 import {useTypedSelector} from '../../store/redux/combine-reducers';
 import {useDispatch} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 //TODO: change useEffect deps
 
 const Header: React.FC = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [inputValue, setInputValue] = useState('');
     const [sort, setSort] = useState<sort>('relevance');
     const [category, setCategory] = useState<category>('all');
@@ -31,6 +33,7 @@ const Header: React.FC = () => {
         } else {
             dispatch(fetchBooks(inputValue, category, sort, currentPage, [], totalPages));
         }
+        history.push("/");
     }, [i])
 
     const onHandleSubmit = (e: React.FormEvent) => {

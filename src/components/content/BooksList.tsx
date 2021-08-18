@@ -22,36 +22,40 @@ const BooksList = () => {
     if (books !== [])  {
         booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
     }
-    console.log(booksState)
+    console.log(booksState);
+
+    const fetchNewBooks = async () => {
+        if (category === 'all') {
+            await dispatch(fetchBooks(filter, '', sort, currentPage, books, totalPages));
+        } else {
+            await dispatch(fetchBooks(filter, category, sort, currentPage, books, totalPages));
+        }
+        setIsFetching(false)
+    }
 
     useEffect(() => {
-        if (category === 'all') {
-            dispatch(fetchBooks(filter, '', sort, currentPage, books, totalPages));
-        } else {
-            dispatch(fetchBooks(filter, category, sort, currentPage, books, totalPages));
-        }
+        fetchNewBooks();
     }, []);
 
-
+    useEffect(() => {
+        if (isFetching) {
+            fetchNewBooks();
+        }
+    }, [isFetching]);
 
     const fetchMoreBooks = () => {
         setIsFetching(true)
     }
-
-
     return (
         <div className={style.wrapper}>
             <h3 className={style.title}>Found {booksState.totalItems} result</h3>
             <div className={style.booksContainer}>
-                {booksArray
-                ? booksArray
-                : <div/>}
+                {booksArray}
             </div>
             {isFetching
-                ? <Loader/>
+                ? <Loader />
                 : <button className={style.moreBtn} onClick={fetchMoreBooks}>More books</button>
             }
-
         </div>
     );
 };

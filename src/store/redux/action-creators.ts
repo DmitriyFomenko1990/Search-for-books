@@ -27,6 +27,19 @@ export const fetchBooks = (
         }
 }
 
+export const fetchBook = (id: string) => {
+    return async (dispatch: Dispatch<bookActions>) =>{
+        try {
+            const response: BookType = await booksAPI.getBook(id);
+            dispatch(setBookActionCreator(response));
+        } catch (err) {
+            dispatch(setIsErrorActionCreator(true));
+        }
+    }
+}
+
+
+
 export const dispatchFilter = (filter: string) => (dispatch: Dispatch<bookActions>) => {
     dispatch(setFilterActionCreator(filter));
 }
@@ -43,6 +56,7 @@ export const dispatchBooks = (books: BookType[]) => (dispatch: Dispatch<bookActi
 
 
 const setBooksActionCreator = (books: BookType[]): bookActions  => ({type: booksActionsType.FETCH_BOOKS, payload: books});
+const setBookActionCreator = (book: BookType): bookActions  => ({type: booksActionsType.FETCH_BOOK, payload: book});
 const setIsErrorActionCreator = (isError: boolean): bookActions  => ({type: booksActionsType.SET_ERROR, payload: isError});
 const setFilterActionCreator = (filter: string): bookActions  => ({type: booksActionsType.SET_FILTER, payload: filter});
 const setSortActionCreator = (sort: sort): bookActions  => ({type: booksActionsType.SET_SORT, payload: sort});

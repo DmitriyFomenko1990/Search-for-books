@@ -6,15 +6,18 @@ export const initialBooksState: BookStateType = {
     sort: 'relevance',
     currentPage: 0,
     totalPages: 0,
+    totalItems: 0,
     isServerError: false,
     books: [],
-    totalItems: 0,
+    book: {}
 };
 
 const booksReducer = (state = initialBooksState, action: bookActions): BookStateType => {
     switch (action.type) {
         case booksActionsType.FETCH_BOOKS :
             return {...state, books: action.payload}
+        case booksActionsType.FETCH_BOOK :
+            return {...state, book: action.payload}
         case booksActionsType.SET_ERROR :
             return {...state, isServerError: action.payload}
         case booksActionsType.SET_FILTER:

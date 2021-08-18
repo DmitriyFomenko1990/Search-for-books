@@ -15,8 +15,8 @@ interface VolumeInfoTypes {
 
 }
 export interface BookType {
-    volumeInfo: VolumeInfoTypes;
-    id: string;
+    volumeInfo?: VolumeInfoTypes;
+    id?: string;
 }
 export type category = "all" | "art" | "biography" | "computers" | "history" | "medical" | "poetry";
 export type sort = "relevance" | "newest";
@@ -29,9 +29,11 @@ export interface BookStateType {
     totalPages: number;
     isServerError: boolean;
     books: [] | BookType[];
+    book: BookType;
 }
 export enum booksActionsType {
     FETCH_BOOKS = 'FETCH_BOOKS',
+    FETCH_BOOK = 'FETCH_BOOK',
     SET_ERROR = 'SET_ERROR',
     SET_FILTER = 'SET_FILTER',
     SET_SORT = 'SET_SORT',
@@ -44,6 +46,10 @@ export enum booksActionsType {
 interface FetchBooksAction{
     type: booksActionsType.FETCH_BOOKS;
     payload: BookType[];
+}
+interface FetchBookAction{
+    type: booksActionsType.FETCH_BOOK;
+    payload: BookType;
 }
 interface SetErrorAction{
     type: booksActionsType.SET_ERROR;
@@ -73,4 +79,4 @@ interface SetTotalItemsAction{
     type: booksActionsType.SET_TOTAL_ITEMS;
     payload: number;
 }
-export type bookActions = FetchBooksAction | SetErrorAction | SetFilterAction | SetSortAction | SetCategoryAction  | SetTotalPagesAction | SetCurrentPageAction | SetTotalItemsAction;
+export type bookActions = FetchBooksAction | FetchBookAction | SetErrorAction | SetFilterAction | SetSortAction | SetCategoryAction  | SetTotalPagesAction | SetCurrentPageAction | SetTotalItemsAction;

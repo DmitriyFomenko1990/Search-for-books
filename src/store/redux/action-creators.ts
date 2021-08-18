@@ -1,6 +1,43 @@
 import {bookActions, booksActionsType, BookType, sort, category} from './books-reducer-types';
-import {Dispatch} from 'redux';
+import {Dispatch} from "redux";
 import {booksAPI} from '../../api/api';
+
+export const fetchBooks = (
+    filter:string,
+    categories: string,
+    sort:string,
+    currentPage:number,
+    prevState:BookType[],
+    totalPages: number) => {
+        return async (dispatch: Dispatch<bookActions>) =>{
+            try {
+                const response: any = await booksAPI.getBooks(filter, categories, currentPage, sort);
+                const state = [...prevState,...response.items];
+                const nextPage= ++currentPage;
+                if (totalPages !== response.totalItems) {
+                    totalPages = Math.ceil(response.totalItems / 30)
+                    dispatch(setTotalPagesActionCreator(totalPages));
+                    dispatch(setTotalItemsActionCreator(response.totalItems));
+                }
+                dispatch(setBooksActionCreator(state));
+                dispatch(setCurrentPageActionCreator(nextPage));
+            } catch (err) {
+                dispatch(setIsErrorActionCreator(true));
+            }
+        }
+}
+
+export const dispatchFilter = (filter: string) => (dispatch: Dispatch<bookActions>) => {
+    dispatch(setFilterActionCreator(filter));
+}
+export const dispatchSort = (sort: sort) =>  (dispatch: Dispatch<bookActions>) =>{
+    dispatch(setSortActionCreator(sort));
+}
+
+export const dispatchCategory = (category: category) => (dispatch: Dispatch<bookActions>) =>{
+    dispatch(setCategoryActionCreator(category));
+}
+
 
 const setBooksActionCreator = (books: BookType[]): bookActions  => ({type: booksActionsType.FETCH_BOOKS, payload: books});
 const setIsErrorActionCreator = (isError: boolean): bookActions  => ({type: booksActionsType.SET_ERROR, payload: isError});
@@ -10,40 +47,4 @@ const setCategoryActionCreator = (category: category): bookActions  => ({type: b
 const setCurrentPageActionCreator = (page: number): bookActions  => ({type: booksActionsType.SET_CURRENT_PAGE, payload: page});
 const setTotalPagesActionCreator = (pages: number): bookActions  => ({type: booksActionsType.SET_TOTAL_PAGES, payload: pages});
 const setTotalItemsActionCreator = (items: number): bookActions  => ({type: booksActionsType.SET_TOTAL_ITEMS, payload: items});
-
-export const dispatchFilter = (filter: string) => {
-    return  (dispatch: Dispatch<bookActions>) =>{
-        dispatch(setFilterActionCreator(filter));
-    }
-}
-export const dispatchSort = (sort: sort) => {
-    return  (dispatch: Dispatch<bookActions>) =>{
-        dispatch(setSortActionCreator(sort));
-    }
-}
-export const dispatchCategory = (category: category) => {
-    return  (dispatch: Dispatch<bookActions>) =>{
-        dispatch(setCategoryActionCreator(category));
-    }
-}
-
-export const fetchBooks = (filter:string, categories: string, start:number, sort:string, prevState:BookType[], totalPages: number) => {
-    return async (dispatch: Dispatch<bookActions>) =>{
-        try {
-            const response: any = await booksAPI.getBooks(filter, categories, start, sort);
-            const state = [...prevState,...response.items];
-            const nextPage= ++start;
-            if (totalPages !== response.totalItems) {
-                totalPages = Math.ceil(response.totalItems / 30)
-                dispatch(setTotalPagesActionCreator(totalPages));
-                dispatch(setTotalItemsActionCreator(response.totalItems));
-            }
-            dispatch(setBooksActionCreator(state));
-            dispatch(setCurrentPageActionCreator(nextPage));
-        } catch (err) {
-            dispatch(setIsErrorActionCreator(true));
-        }
-    }
-}
-
 

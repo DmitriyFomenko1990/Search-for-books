@@ -2,10 +2,19 @@
 
 .wrapper{
   display: flex;
+  @media only screen and (max-width: 850px) {
+    flex-direction: column;
+  }
 }
 .coverWrapper{
   background-color: $grey;
-  padding: 80px 140px 0;
+  padding: 50px 100px;
+  @media only screen and (max-width: 850px) {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+  }
 }
 .bookImage{
   width: 256px;
@@ -14,6 +23,9 @@
 .aboutWrapper{
   width: 100%;
   padding: 50px;
+  @media only screen and (max-width: 850px) {
+    padding: 20px;
+  }
 }
 .categories{
   font-weight: 300;
@@ -31,7 +43,7 @@
 }
 .descWrapper{
   width: 100%;
-  min-height: 300px;
+  min-height: 200px;
   padding: 20px;
   border: $dark-grey solid 1px;
 }

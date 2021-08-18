@@ -2,7 +2,7 @@
 
 .wrapper{
    width: 100%;
-   padding: 50px 0;
+   padding: 30px 0;
    background: url("../../img/header-books.jpg") no-repeat ;
    background-size: cover;
    display: flex;
@@ -10,7 +10,7 @@
    flex-direction: column;
 }
 .title{
-   margin:0 15px 30px;
+   margin:0 15px 20px;
    text-align: center;
 }
 .form{
@@ -34,8 +34,8 @@
 }
 .selectInput{
    padding: 5px;
-   font-size: 24px;
-   line-height: 25px;
+   font-size: 22px;
+   line-height: 24px;
    color: $dark-grey;
    margin-left: 15px;
    width: 250px;

@@ -1,15 +1,15 @@
 import React from 'react';
 import style from './content.module.scss';
-import BooksList from '../BooksList';
 import {Switch, Route} from 'react-router-dom';
-import BooksPage from '../book-page/BooksPage';
+import BookListContainer from './BookListContainer';
+import BookPageContainer from '../book-page/BookPageContainer';
 
 const Content: React.FC = () => {
     return (
        <div className={style.wrapper}>
            <Switch>
-               <Route exact path='/' render={() => <BooksList />}/>
-               <Route path='/:bookId' render={() => <BooksPage/>}/>
+               <Route exact path='/' render={() => <BookListContainer />}/>
+               <Route path='/:bookId' render={() => <BookPageContainer/>}/>
            </Switch>
        </div>
     );

@@ -2,8 +2,8 @@ import {BookStateType, booksActionsType, bookActions} from './books-reducer-type
 
 export const initialBooksState: BookStateType = {
     filter: '',
-    category: "all",
-    sort: "relevance",
+    category: 'all',
+    sort: 'relevance',
     currentPage: 0,
     totalPages: 0,
     isServerError: false,

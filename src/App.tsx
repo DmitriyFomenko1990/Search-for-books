@@ -6,7 +6,7 @@ import Content from "./components/content/books-list/Content";
 function App()  {
   return (
     <div className={styles.App}>
-        <Header sort="relevance" category="all" />
+        <Header />
         <Content />
     </div>
   );

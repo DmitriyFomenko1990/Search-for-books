@@ -3,7 +3,7 @@ import booksReducer from "./books-reducer";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 export const reducers = combineReducers({
-    booksReducer: booksReducer,
+    bookReducer: booksReducer,
 });
 
 export type bookState = ReturnType<typeof reducers>;

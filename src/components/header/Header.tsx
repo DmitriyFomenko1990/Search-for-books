@@ -56,7 +56,7 @@ const Header: React.FC = () => {
             <form className={style.form} onSubmit={onHandleSubmit}>
                 <input className={style.textInput} type='text'
                        value={inputValue} onChange={onHandleChange}/>
-                <div>
+                <div className={style.selectsWrapper}>
                     <label className={style.label}>
                         Categories
                         <select className={style.selectInput} value={category}

@@ -10,7 +10,7 @@ import {
 } from "../../store/redux/action-creators";
 import {useTypedSelector} from "../../store/redux/combine-reducers";
 import {useDispatch} from "react-redux";
-
+//TODO: change useEffect deps
 
 const Header: React.FC = () => {
     const dispatch = useDispatch();

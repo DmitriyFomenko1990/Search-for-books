@@ -15,7 +15,6 @@ const BookListContainer = () => {
     const currentPage = booksState.currentPage;
     const totalPages = booksState.totalPages;
     const books = booksState.books;
-    debugger
     useEffect(() => {
         dispatch(fetchBooks(filter, category, sort, currentPage, books, totalPages));
     }, [filter, sort, category]);

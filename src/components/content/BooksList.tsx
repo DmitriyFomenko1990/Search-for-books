@@ -23,19 +23,10 @@ const BooksList: React.FC<BooksListType> = ({booksState}) => {
     if (books !== [])  {
         booksArray =  books.map((book, index) =>  <Book book={book} key={index} />)
     }
-debugger
     const asyncFetch = async () => {
-        if (category === 'all') {
-            await dispatch(fetchBooks(filter, '', sort, currentPage, books, totalPages));
-        } else {
-            await dispatch(fetchBooks(filter, category, sort, currentPage, books, totalPages));
-        }
+        await dispatch(fetchBooks(filter, category, sort, currentPage, books, totalPages));
         setIsFetching(false)
     }
-
-    useEffect(() => {
-        asyncFetch();
-    }, []);
 
     useEffect(() => {
         if (isFetching) {
@@ -46,7 +37,6 @@ debugger
     const fetchMoreBooks = () => {
         setIsFetching(true)
     }
-
     return (
         <div className={style.wrapper}>
             <h3 className={style.title}>Found {booksState.totalItems} result</h3>

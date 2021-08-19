@@ -11,6 +11,9 @@ export const fetchBooks = (
     totalPages: number) => {
         return async (dispatch: Dispatch<bookActions>) =>{
             try {
+                if (categories === 'all') {
+                    categories = '';
+                }
                 const response: any = await booksAPI.getBooks(filter, categories, currentPage, sort);
                 const state = [...prevState,...response.items];
                 const nextPage= ++currentPage;
@@ -47,6 +50,12 @@ export const dispatchSort = (sort: sort) =>  (dispatch: Dispatch<bookActions>) =
 
 export const dispatchCategory = (category: category) => (dispatch: Dispatch<bookActions>) =>{
     dispatch(setCategoryActionCreator(category));
+}
+export const dispatchBooks = (books: BookType[]) => (dispatch: Dispatch<bookActions>) =>{
+    dispatch(setBooksActionCreator(books));
+}
+export const dispatchCurrentPage = (page: number) => (dispatch: Dispatch<bookActions>) =>{
+    dispatch(setCurrentPageActionCreator(page));
 }
 
 const setBooksActionCreator = (books: BookType[]): bookActions  => ({type: booksActionsType.FETCH_BOOKS, payload: books});

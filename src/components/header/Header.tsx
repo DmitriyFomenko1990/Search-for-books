@@ -1,16 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import style from './header.module.scss';
-import {BookStateType, category, sort} from '../../store/redux/books-reducer-types';
+import {category, sort} from '../../store/redux/books-reducer-types';
 import {
-    dispatchCategory,
+    dispatchBooks,
+    dispatchCategory, dispatchCurrentPage,
     dispatchFilter,
     dispatchSort,
-    fetchBooks
 } from '../../store/redux/action-creators';
-import {useTypedSelector} from '../../store/redux/combine-reducers';
 import {useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-//TODO: change useEffect deps
 
 const Header: React.FC = () => {
     const dispatch = useDispatch();
@@ -18,27 +16,23 @@ const Header: React.FC = () => {
     const [inputValue, setInputValue] = useState('');
     const [sort, setSort] = useState<sort>('relevance');
     const [category, setCategory] = useState<category>('all');
-    const [i, setI] = useState(0);
-
-    const booksState: BookStateType = useTypedSelector(state => state.bookReducer);
-    const currentPage = booksState.currentPage;
-    const totalPages = booksState.totalPages;
+    const [isSearch, setIsSearch] = useState(false);
 
     useEffect(()=>{
-        dispatch(dispatchSort(sort));
-        dispatch(dispatchCategory(category));
-        dispatch(dispatchFilter(inputValue));
-        if (category === 'all') {
-            dispatch(fetchBooks(inputValue, '', sort, currentPage, [], totalPages));
-        } else {
-            dispatch(fetchBooks(inputValue, category, sort, currentPage, [], totalPages));
+        if (isSearch) {
+            dispatch(dispatchSort(sort));
+            dispatch(dispatchCategory(category));
+            dispatch(dispatchFilter(inputValue));
+            dispatch(dispatchCurrentPage(1))
+            dispatch(dispatchBooks( []));
+            setIsSearch(false);
+            history.push("/");
         }
-        history.push("/");
-    }, [i])
+    }, [isSearch])
 
     const onHandleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setI(i => i+1);
+        setIsSearch(true);
     };
     const onHandleChange = (e:React.FormEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value);

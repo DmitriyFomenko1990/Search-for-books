@@ -7,7 +7,6 @@ interface BooksPageType {
     isFetch: boolean;
     setIsFetch:  React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 const BooksPage: React.FC<BooksPageType> = ({isFetch,setIsFetch}) => {
     const booksState: BookStateType = useTypedSelector(state => state.bookReducer);
     const categories = booksState.book.volumeInfo?.categories?.join(' / ');
@@ -21,7 +20,6 @@ const BooksPage: React.FC<BooksPageType> = ({isFetch,setIsFetch}) => {
         return {
             __html: description };
     };
-
     return (
         <div className={style.wrapper}>
             <div className={style.coverWrapper}>
